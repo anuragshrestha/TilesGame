@@ -1,4 +1,3 @@
-
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -19,11 +18,11 @@ import java.util.stream.Collectors;
 
 public class boardGrid extends Parent {
 
-    public static final int TILE_SIZE = 60;
-    public static final int GRID_SIZE = 5;
+    private static final int TILE_SIZE = 60;
+    private static final int GRID_SIZE = 6;
 
     GridPane gridPane;
-    List<Color> colorList;
+    private List<Color> colorList;
     HashMap<StackPane, List<Color>> tileMap = new HashMap<>();
     StackPane selectedTile = null;
     ScoreBoard scoreBoard = new ScoreBoard();
@@ -38,7 +37,7 @@ public class boardGrid extends Parent {
      * This method adds all the color to coloList and then shuffles
      * the list randomly.
      */
-    public void initializeColor(){
+    private void initializeColor(){
         Color[] colors = new Color[]{Color.RED, Color.PURPLE, Color.GREEN,
                 Color.YELLOW, Color.BLACK};
 
@@ -68,7 +67,7 @@ public class boardGrid extends Parent {
      * and stack pane is added to the grid pane in each specific index.
      */
 
-    public  void tile(){
+    private void tile(){
 
         gridPane = new GridPane();
         initializeColor();
@@ -128,7 +127,7 @@ public class boardGrid extends Parent {
     }
 
 
-    public void handleTileClick(StackPane clickedTile) {
+    private void handleTileClick(StackPane clickedTile) {
 
         if (selectedTile != null) {
             selectedTile.setStyle(" ");
@@ -140,7 +139,7 @@ public class boardGrid extends Parent {
 
     }
 
-     public  void removeCommonColors(StackPane firstTile, StackPane secondTile){
+     private  void removeCommonColors(StackPane firstTile, StackPane secondTile){
 
        List<Color> colors1 = tileMap.get(firstTile);
        List<Color> colors2 = tileMap.get(secondTile);
@@ -150,11 +149,8 @@ public class boardGrid extends Parent {
        colors1.removeAll(commonColors);
        colors2.removeAll(commonColors);
 
-        if(!commonColors.isEmpty()) {
-          scoreBoard.incrementStreak();
-        } else {
-            scoreBoard.resetStreak();
-        }
+         boolean hasCommonColors = !commonColors.isEmpty();
+         scoreBoard.updateStreak(hasCommonColors);
 
        //Call the displayTile class to update the GUI Display
         DisplayTile.updateDisplay(firstTile,colors1,TILE_SIZE);
