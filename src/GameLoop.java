@@ -1,6 +1,5 @@
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 
@@ -17,8 +16,7 @@ public class GameLoop extends Application {
 
         boardGrid board = new boardGrid();
 
-
-        Scene scene = new Scene(board,380,500);
+        Scene scene = new Scene(board,380,440);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
