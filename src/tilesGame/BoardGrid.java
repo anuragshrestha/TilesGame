@@ -134,7 +134,6 @@ public class BoardGrid extends Parent {
                 Rectangle innerBox = new Rectangle((double) TILE_SIZE / 2,
                         (double) TILE_SIZE / 2, innerColor);
 
-
                 stackPane.getChildren().addAll(outerBox,middleBox,innerBox);
                 stackPane.addEventHandler(MouseEvent.MOUSE_CLICKED, e ->
                         handleTileClick(stackPane));
