@@ -15,9 +15,14 @@ public class ScoreBoard {
 
    VBox vbox;
 
+
+    /**
+     * Sets the font size, color  of the current and longest streaks text.
+     * Then creates a Vbox and adds the currentStreak and longestStreak text
+     */
     public ScoreBoard() {
 
-        // Setting the font for the text right here
+
         currentStreakText.setFont(Font.font("Arial", FontWeight.BOLD, 15));
         longestStreakText.setFont(Font.font("Arial", FontWeight.BOLD, 15));
 
@@ -31,6 +36,12 @@ public class ScoreBoard {
         vbox.getChildren().addAll(currentStreakText, longestStreakText);
     }
 
+    /**
+     * This method takes a boolean as a parameter, and calls the
+     * incrementStreak method if the streaks had common colors,
+     * else calls the resetStreak method.
+     * @param hasCommonColors shared colors between two selected tiles
+     */
     public void updateStreak(boolean hasCommonColors) {
         if (hasCommonColors) {
             incrementStreak();
@@ -39,6 +50,11 @@ public class ScoreBoard {
         }
     }
 
+    /**
+     * Increments the streaks and updates the currentStreaks
+     * if it is more than the longestStreak. And then updates
+     * the score in the GUI display.
+     */
     private void incrementStreak() {
         currentStreak++;
         if (currentStreak > longestStreak) {
@@ -47,18 +63,34 @@ public class ScoreBoard {
         updateText();
     }
 
+    /**
+     * Resets the current streaks to zero when
+     * no common colors are found.
+     */
     private void resetStreak() {
         currentStreak = 0;
         updateText();
     }
 
+
+    /**
+     * updates the GUI display when the streaks are changed.
+     */
     private void updateText() {
 
         currentStreakText.setText("Current Streaks: " + currentStreak);
         longestStreakText.setText("Longest Streaks: " + longestStreak);
     }
 
+    /**
+     * Returns the Vbox where the contains the currentStreakText and
+     * longestStreakText
+     * @return Vbox
+     */
+
     public VBox getVbox() {
+
         return vbox;
+
     }
 }
